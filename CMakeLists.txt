@@ -11,7 +11,9 @@ option(ENABLE_STATIC "Build static (.a) library" ON)
 
 find_package(ZLIB REQUIRED)
 
-include_directories(${ZLIB_INCLUDE_DIRS})
+if (UNIX)
+	include_directories(${ZLIB_INCLUDE_DIRS}) # Causes conflicts wit boost on Windows if zlib is installed in a project where parts of boost are installed as well (e.g. GDAL). Indicate full path of zlib.h in header file instead.
+endif (UNIX)
 
 add_library(cnpy SHARED "cnpy.cpp")
 target_link_libraries(cnpy ${ZLIB_LIBRARIES})

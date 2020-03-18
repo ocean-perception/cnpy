@@ -13,7 +13,11 @@
 #include<typeinfo>
 #include<iostream>
 #include<cassert>
+#if defined(unix) || defined(__unix__) || defined(__unix)
 #include<zlib.h>
+#else
+#include<C:/Program Files/GDAL/include/zlib.h>
+#endif
 #include<map>
 #include<memory>
 #include<stdint.h>
